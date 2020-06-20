@@ -96,13 +96,20 @@ int main(void)
   MX_ADC_Init();
   MX_SPI1_Init();
   /* USER CODE BEGIN 2 */
+  // setup the WiFi module
 
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
+  uint8_t testData = 0xA6;
+  HAL_GPIO_WritePin(NRF_CE_GPIO_Port, NRF_CE_Pin, GPIO_PIN_SET);
   while (1)
   {
+	  HAL_GPIO_WritePin(NRF_CE_GPIO_Port, NRF_CE_Pin, GPIO_PIN_RESET);
+	  HAL_SPI_Transmit(&hspi1, &testData, 1, HAL_MAX_DELAY);
+	  HAL_GPIO_WritePin(NRF_CE_GPIO_Port, NRF_CE_Pin, GPIO_PIN_SET);
+	  HAL_Delay(500);
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
