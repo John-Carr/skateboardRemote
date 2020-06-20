@@ -8,6 +8,9 @@
 #ifndef NRF24_DRIVER_DATA_LINK_LAYER_H_
 #define NRF24_DRIVER_DATA_LINK_LAYER_H_
 
+//Include Files
+#include "main.h"
+
 class NRF_DATA_LINK_LAYER {
 //Public Function Prototypes
 public:
@@ -33,7 +36,7 @@ static constexpr uint8_t END_CHAR = 0x3F;
  * @brief This takes in the initialized SPI instance to use for communicating information
  * @param @uart_instance: initialized SPI instance
  */
-NRF_DATA_LINK_LAYER(SPI_TypeDef* uart_instance);
+NRF_DATA_LINK_LAYER(SPI_HandleTypeDef* spi_instance, GPIO_TypeDef* ce_port, uint16_t ce_pin);
 //Protected Function Prototypes
 /**
  * @brief This sends a message pointed to be @data of @data_length length
@@ -43,13 +46,13 @@ NRF_DATA_LINK_LAYER(SPI_TypeDef* uart_instance);
 void sendMessage(uint8_t* data, uint16_t data_length);
 private:
 //Private Variables
-const SPI_TypeDef* spiInstance;
-const GPIO_TypeDef* cePort;
-const uint16_t cePin;
+SPI_HandleTypeDef* spiInstance;
+GPIO_TypeDef* cePort;
+uint16_t cePin;
 //Private Function Prototypes
 /**
  * @brief This sends data through SPI
- * @param Data to send
+ * @param data a copy of the data to send
  */
 inline void sendData(uint8_t data);
 };
