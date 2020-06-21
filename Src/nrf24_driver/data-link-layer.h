@@ -3,6 +3,7 @@
  *
  *  Created on: Jun 20, 2020
  *      Author: John Carr
+ *      Credit: Parts adapted from https://github.com/Solar-Gators/Telemetry_2019-2020
  */
 
 #ifndef NRF24_DRIVER_DATA_LINK_LAYER_H_
